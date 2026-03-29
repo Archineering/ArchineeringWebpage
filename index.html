@@ -4,26 +4,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Archineering | light steelwork</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <title>Archineering | Structural Detailing &amp; BIM</title>
   <style>
+    @font-face {
+      font-family: "Artifakt Element";
+      src: url("./fonts/ArtifaktElement-Bold.woff2") format("woff2"),
+           url("./fonts/ArtifaktElement-Bold.woff") format("woff"),
+           url("./fonts/ArtifaktElement-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Artifakt Element";
+      src: url("./fonts/ArtifaktElement-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    /* ── DARK is the default — deep navy blueprint ──────────────────────── */
     :root {
+      --paper: #0C0E14;
+      --ink: #EDE8DF;
+      --muted: #8A95A0;
+      --gold: #C5A059;
+      --gold-dim: rgba(197, 160, 89, 0.14);
+      --line: rgba(197, 160, 89, 0.07);
+      --line-strong: rgba(197, 160, 89, 0.14);
+      --card: rgba(18, 22, 32, 0.7);
+      --shadow: 0 14px 36px rgba(0, 0, 0, 0.6);
+      --glass-glow: inset 0 1px 1px rgba(197, 160, 89, 0.1), inset 0 0 20px rgba(197, 160, 89, 0.04);
+      --glass-border: rgba(197, 160, 89, 0.18);
+      --max: 1160px;
+      --header-bg: rgba(12, 14, 20, 0.92);
+      --strip-bg: linear-gradient(180deg, #111420, #0C0E14);
+      --strip-full: #111420;
+      --bg-alt: #111420;
+      --panel-bg: rgba(18, 22, 32, 0.75);
+      --blueprint-bg: #0C0E14;
+      --model-strip: #111420;
+      --hybrid-bg: #111420;
+      --video-mask-edge: #0C0E14;
+      --video-mask-alpha: rgba(12, 14, 20, 0.9);
+      --video-mask-clear: rgba(12, 14, 20, 0);
+      --input-border: #2A3040;
+      --tile-text: #EDE8DF;
+      --tile-icon: #C5A059;
+      --btn-main-bg: var(--gold);
+      --btn-main-text: #0C0E14;
+      --footer-bg: #111420;
+    }
+
+    /* ── LIGHT is the opt-in override ───────────────────────────────────── */
+    body.light-theme {
       --paper: #ffffff;
       --ink: #121417;
       --muted: #5d6773;
       --gold: #be9549;
-      --line: rgba(255, 255, 255, 0.1);
-      --line-strong: rgba(255, 255, 255, 0.18);
-      --card: rgba(255, 255, 255, 0.2);
+      --gold-dim: rgba(190, 149, 73, 0.1);
+      --line: rgba(18, 20, 23, 0.07);
+      --line-strong: rgba(18, 20, 23, 0.13);
+      --card: rgba(255, 255, 255, 0.55);
       --shadow: 0 14px 36px rgba(0, 0, 0, 0.07);
       --glass-glow: inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.15);
       --glass-border: rgba(255, 255, 255, 0.4);
-      --max: 1160px;
-      --header-bg: rgba(255, 255, 255, 0.4);
+      --header-bg: rgba(255, 255, 255, 0.82);
       --strip-bg: linear-gradient(180deg, #fbfaf6, #f6f4ee);
       --strip-full: #e9e4d8;
       --bg-alt: #fff;
@@ -42,37 +89,25 @@
       --footer-bg: #f8f9fb;
     }
 
-    body.dark-theme {
-      --paper: #383838;
-      --ink: #fbfaf6;
-      --muted: #b5bdc4;
-      --line: rgba(255, 255, 255, 0.1);
-      --line-strong: rgba(255, 255, 255, 0.18);
-      --card: rgba(46, 46, 46, 0.35);
-      --shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-      --glass-glow: inset 0 1px 1px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --header-bg: rgba(56, 56, 56, 0.4);
-      --strip-bg: linear-gradient(180deg, #303030, #2a2a2a);
-      --strip-full: #424242;
-      --bg-alt: #2e2e2e;
-      --panel-bg: rgba(66, 66, 66, 0.25);
-      --blueprint-bg: linear-gradient(180deg, #303030, #2a2a2a);
-      --model-strip: #2e2e2e;
-      --hybrid-bg: #424242;
-      --video-mask-edge: #383838;
-      --video-mask-alpha: rgba(56, 56, 56, 0.9);
-      --video-mask-clear: rgba(56, 56, 56, 0);
-      --input-border: #646b73;
-      --tile-text: #fbfaf6;
-      --tile-icon: #dbbd42;
-      --btn-main-bg: var(--gold);
-      --btn-main-text: #121417;
-      --footer-bg: var(--bg-alt);
-    }
-
     /* Metallic Text Utility */
     .metallic-text {
+      background: linear-gradient(105deg,
+          #EDE8DF 0%,
+          #d4d4d2 20%,
+          var(--gold) 35%,
+          #EDE8DF 55%,
+          #c8c7c4 75%,
+          var(--gold) 85%,
+          #EDE8DF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 300% auto;
+      animation: shine 14s ease-in-out infinite alternate;
+      color: var(--ink);
+    }
+
+    body.light-theme .metallic-text {
       background: linear-gradient(105deg,
           var(--ink) 0%,
           var(--ink) 25%,
@@ -88,23 +123,6 @@
       background-size: 300% auto;
       animation: shine 12s ease-in-out infinite alternate;
       color: var(--ink);
-      /* fallback */
-    }
-
-    body.dark-theme .metallic-text {
-      background: linear-gradient(105deg,
-          #fbfaf6 0%,
-          #e2e2df 20%,
-          var(--gold) 35%,
-          #fbfaf6 55%,
-          #d4d4d2 75%,
-          var(--gold) 85%,
-          #fbfaf6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 300% auto;
-      animation: shine 14s ease-in-out infinite alternate;
     }
 
     @keyframes shine {
@@ -128,7 +146,10 @@
     body {
       margin: 0;
       color: var(--ink);
-      font-family: "Source Sans 3", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-family: "Artifakt Element", "Arial Narrow", Arial, sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       line-height: 1.5;
       background: var(--blueprint-bg);
       background-attachment: fixed;
@@ -141,20 +162,15 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(18, 20, 23, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18, 20, 23, 0.055) 1px, transparent 1px),
-        repeating-linear-gradient(24deg, transparent 0 38px, rgba(18, 20, 23, 0.045) 38px 39px);
-      background-size: 34px 34px, 34px 34px, 120px 120px;
-      opacity: 0.55;
+      background-image: radial-gradient(circle, rgba(197, 160, 89, 0.38) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.7;
       z-index: -1;
     }
 
-    body.dark-theme::before {
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        repeating-linear-gradient(24deg, transparent 0 38px, rgba(255, 255, 255, 0.02) 38px 39px);
+    body.light-theme::before {
+      background-image: radial-gradient(circle, rgba(18, 20, 23, 0.22) 1px, transparent 1px);
+      opacity: 0.55;
     }
 
     .cube-overlay {
@@ -227,7 +243,7 @@
     .logo {
       text-decoration: none;
       color: var(--ink);
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       letter-spacing: 0.12em;
       font-size: 0.93rem;
@@ -278,20 +294,22 @@
       stroke: currentColor;
     }
 
+    /* default = dark: show sun (click to go light) */
     .icon-moon {
-      display: block;
+      display: none;
     }
 
     .icon-sun {
-      display: none;
-    }
-
-    body.dark-theme .icon-moon {
-      display: none;
-    }
-
-    body.dark-theme .icon-sun {
       display: block;
+    }
+
+    /* light-theme: show moon (click to go dark) */
+    body.light-theme .icon-moon {
+      display: block;
+    }
+
+    body.light-theme .icon-sun {
+      display: none;
     }
 
     .theme-toggle-btn:hover {
@@ -301,8 +319,8 @@
     .menu a {
       text-decoration: none;
       color: var(--muted);
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
-      font-weight: 600;
+      font-family: "Artifakt Element", Arial, sans-serif;
+      font-weight: 700;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -467,7 +485,7 @@
 
     .video-copy h2 {
       margin: 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 1.1rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -475,7 +493,7 @@
 
     .video-copy p {
       margin: 0.45rem 0 0;
-      color: #555f6c;
+      color: var(--muted);
     }
 
     .hero {
@@ -520,7 +538,7 @@
 
     .model-head h3 {
       margin: 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.95rem;
       letter-spacing: 0.08em;
@@ -528,7 +546,7 @@
 
     .model-head p {
       margin: 0;
-      color: #5f6975;
+      color: var(--muted);
       font-size: 0.95rem;
     }
 
@@ -578,8 +596,8 @@
 
     h1 {
       margin: 0.7rem 0 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
-      font-weight: 800;
+      font-family: "Artifakt Element", Arial, sans-serif;
+      font-weight: 700;
       font-size: clamp(2rem, 6vw, 4.7rem);
       line-height: 1.1;
       padding-bottom: 0.2em;
@@ -611,7 +629,7 @@
       text-decoration: none;
       border-radius: 8px;
       padding: 0.72rem 1rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -632,7 +650,7 @@
     .btn-ghost {
       border: 1px solid var(--line-strong);
       color: var(--ink);
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(197, 160, 89, 0.08);
     }
 
     .hero-panel {
@@ -647,11 +665,11 @@
 
     .hero-panel-title {
       margin: 0 0 0.6rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #394350;
+      color: var(--ink);
     }
 
     .hero-stats {
@@ -671,7 +689,7 @@
 
     .stat strong {
       display: block;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 0.78rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -689,7 +707,7 @@
 
     .section h2 {
       margin: 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       letter-spacing: 0.02em;
       font-size: clamp(1.4rem, 2.9vw, 2.2rem);
@@ -742,7 +760,7 @@
 
     .card h3 {
       margin: 0 0 0.5rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 0.9rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -854,7 +872,7 @@
       border: 1px solid rgba(18, 20, 23, 0.15);
       border-radius: 8px;
       padding: 0.45rem 0.65rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -959,7 +977,7 @@
     label {
       font-size: 0.82rem;
       color: var(--ink);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     input,
@@ -988,7 +1006,7 @@
 
     button {
       border: 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       padding: 0.7rem 0.95rem;
       border-radius: 8px;
       background: var(--btn-main-bg);
@@ -1027,14 +1045,14 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     }
 
-    body.dark-theme .card:hover,
-    body.dark-theme .work-item:hover {
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    body.light-theme .card:hover,
+    body.light-theme .work-item:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
 
     .card h3 {
       margin-top: 0;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       color: var(--ink);
     }
@@ -1095,7 +1113,7 @@
 
     .footer-title {
       margin: 0 0 0.45rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       color: var(--ink);
       font-size: 0.85rem;
       font-weight: 700;
@@ -1188,7 +1206,7 @@
       pointer-events: none;
       opacity: 0.8;
       transition: opacity 0.3s ease;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
     }
 
     .work-video-container:hover .play-hint {
@@ -1203,7 +1221,7 @@
     .work-description h3 {
       margin-top: 0;
       margin-bottom: 0.5rem;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
     }
 
@@ -1218,8 +1236,8 @@
       background: rgba(18, 20, 23, 0.02);
     }
 
-    body.dark-theme .work-model-space {
-      background: rgba(255, 255, 255, 0.02);
+    body.light-theme .work-model-space {
+      background: rgba(18, 20, 23, 0.02);
     }
 
     .placeholder-text {
@@ -1235,7 +1253,7 @@
       color: var(--btn-main-text);
       border: none;
       border-radius: 8px;
-      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
@@ -1330,7 +1348,7 @@
     #preloader {
       position: fixed;
       inset: 0;
-      background: var(--video-mask-edge);
+      background: #0C0E14;
       z-index: 9999;
       display: flex;
       justify-content: center;
@@ -1395,7 +1413,7 @@
       border: none;
       border-radius: 50px;
       padding: 0.75rem 1.2rem 0.75rem 1rem;
-      font-family: "Montserrat", sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       font-size: 0.8rem;
       letter-spacing: 0.05em;
@@ -1477,7 +1495,7 @@
     }
 
     .chat-panel-name {
-      font-family: "Montserrat", sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
       font-size: 0.82rem;
       letter-spacing: 0.05em;
@@ -1602,8 +1620,8 @@
       border-radius: 20px;
       padding: 0.38rem 0.8rem;
       font-size: 0.79rem;
-      font-family: "Montserrat", sans-serif;
-      font-weight: 600;
+      font-family: "Artifakt Element", Arial, sans-serif;
+      font-weight: 700;
       cursor: pointer;
       transition: background 150ms ease, color 150ms ease, transform 150ms ease;
     }
@@ -1731,8 +1749,8 @@
       font-size: 0.79rem;
       color: var(--muted);
       cursor: pointer;
-      font-family: "Montserrat", sans-serif;
-      font-weight: 600;
+      font-family: "Artifakt Element", Arial, sans-serif;
+      font-weight: 700;
     }
 
     .chat-file-skip:hover { border-color: var(--ink); color: var(--ink); }
@@ -1745,7 +1763,7 @@
       padding: 0.4rem 0.9rem;
       font-size: 0.79rem;
       cursor: pointer;
-      font-family: "Montserrat", sans-serif;
+      font-family: "Artifakt Element", Arial, sans-serif;
       font-weight: 700;
     }
 
@@ -1762,10 +1780,287 @@
       0%,100% { opacity:1; } 50% { opacity:0.4; }
     }
 
+    /* ═══════════════════════════════════════════════════════════════
+       PHASE 1 UPGRADES — v4.0.2
+    ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Custom crosshair cursor (desktop/pointer devices only) ── */
+    body.custom-cursor,
+    body.custom-cursor * { cursor: none !important; }
+    .cursor {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 24px; height: 24px;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+    body.custom-cursor .cursor { display: block; }
+    .cursor::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 100%; height: 1px;
+      background: var(--gold);
+      transform: translateY(-50%);
+    }
+    .cursor::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 1px; height: 100%;
+      background: var(--gold);
+      transform: translateX(-50%);
+    }
+    .cursor-ring {
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(197, 160, 89, 0.45);
+    }
+
+    /* ── Scroll progress rail (right edge) ─────────────────────── */
+    .scroll-rail {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      z-index: 90;
+      pointer-events: none;
+      background: rgba(197, 160, 89, 0.08);
+    }
+    .scroll-fill {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--gold);
+      transition: height 0.12s linear;
+    }
+    .scroll-ticks {
+      position: absolute;
+      right: 6px;
+      top: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      pointer-events: none;
+    }
+    .scroll-ticks span {
+      font-family: "Arial Narrow", "Courier New", monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(197, 160, 89, 0.35);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      white-space: nowrap;
+      line-height: 1;
+    }
+    @media (max-width: 940px) {
+      .scroll-rail { display: none; }
+    }
+
+    /* ── Hero outlined/stitch title ─────────────────────────────── */
+    .hero-title {
+      position: relative;
+      margin: 0.7rem 0 0;
+      font-family: "Artifakt Element", Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      padding-bottom: 0.15em;
+      user-select: none;
+    }
+    .hero-title-outline {
+      display: block;
+      -webkit-text-stroke: 1.5px var(--gold);
+      color: transparent;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-title-solid {
+      position: absolute;
+      inset: 0;
+      display: block;
+      -webkit-text-stroke: 0;
+      color: var(--gold);
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-title.fill-active .hero-title-solid {
+      clip-path: inset(0 0% 0 0);
+    }
+
+    /* ── Technical metadata overlay on hero ─────────────────────── */
+    .hero-meta {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 0;
+      padding: 0 1.2rem;
+      font-family: "Arial Narrow", "Courier New", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.22rem;
+      pointer-events: none;
+      line-height: 1.4;
+    }
+    .hero-meta-row {
+      display: flex;
+      gap: 0.6em;
+    }
+    .meta-key {
+      opacity: 0.55;
+      min-width: 3.5em;
+    }
+    @media (max-width: 940px) { .hero-meta { display: none; } }
+
+    /* ── Compass rose (hero top-right) ──────────────────────────── */
+    .compass-rose {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      width: 68px;
+      height: 68px;
+      color: var(--gold);
+      opacity: 0.42;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+    }
+    .compass-rose:hover { opacity: 0.7; }
+    @media (max-width: 940px) { .compass-rose { display: none; } }
+
+    /* ── Sheet-label section headers ────────────────────────────── */
+    .sheet-label {
+      font-family: "Arial Narrow", "Courier New", monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.55;
+      margin-bottom: 0.55rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      pointer-events: none;
+    }
+    .sheet-label::before {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── Registration mark corners on portfolio cards ────────────── */
+    .reg-marks {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .reg-mark {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .work-item:hover .reg-mark,
+    .work-video-container:hover .reg-mark { opacity: 0.6; }
+    .reg-mark.tl { top: 8px; left: 8px; }
+    .reg-mark.tr { top: 8px; right: 8px; transform: rotate(90deg); }
+    .reg-mark.bl { bottom: 8px; left: 8px; transform: rotate(-90deg); }
+    .reg-mark.br { bottom: 8px; right: 8px; transform: rotate(180deg); }
+
+    /* ── Blueprint hover overlay on portfolio videos ─────────────── */
+    .bp-overlay {
+      position: absolute;
+      inset: 0;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 3;
+    }
+    .bp-overlay svg {
+      width: 100%;
+      height: 100%;
+    }
+    .work-video-container:hover .bp-overlay { opacity: 0.5; }
+
+    /* ── Hero panel-title update for dark ───────────────────────── */
+    .hero-panel-title { color: var(--ink); }
+    body.light-theme .hero-panel-title { color: #394350; }
+
+    /* ── Video copy paragraph colour ───────────────────────────── */
+    .video-copy p { color: var(--muted); }
+    body.light-theme .video-copy p { color: #555f6c; }
+
+    /* ── Model-head paragraph ───────────────────────────────────── */
+    .model-head p { color: var(--muted); }
+
+    /* ── Hybrid caption ─────────────────────────────────────────── */
+    .hybrid-caption {
+      background: rgba(12, 14, 20, 0.85);
+      border: 1px solid rgba(197, 160, 89, 0.2);
+      color: #EDE8DF;
+    }
+    body.light-theme .hybrid-caption {
+      background: rgba(252, 251, 248, 0.85);
+      border: 1px solid rgba(18, 20, 23, 0.15);
+      color: #2a3139;
+    }
+
+    /* ── Footer links dark default ──────────────────────────────── */
+    .footer-links a { color: var(--muted); }
+    body.light-theme .footer-links a { color: #49525c; }
+
+    /* ── btn-ghost for dark default ─────────────────────────────── */
+    .btn-ghost {
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      background: rgba(197, 160, 89, 0.08);
+    }
+    body.light-theme .btn-ghost {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
   </style>
 </head>
 
 <body>
+  <!-- Custom crosshair cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"><div class="cursor-ring"></div></div>
+
+  <!-- Scroll progress rail -->
+  <div class="scroll-rail" aria-hidden="true">
+    <div class="scroll-fill" id="scrollFill"></div>
+    <div class="scroll-ticks">
+      <span>Home</span>
+      <span>About</span>
+      <span>Design</span>
+      <span>Portfolio</span>
+      <span>Values</span>
+      <span>Contact</span>
+    </div>
+  </div>
+
   <!-- Preloader -->
   <div id="preloader">
     <canvas id="loader-canvas"></canvas>
@@ -1828,10 +2123,32 @@
 
     <section class="hero blueprint-bg" id="hero-section">
       <div class="interactive-glow" id="hero-glow"></div>
+
+      <!-- Compass rose -->
+      <div class="compass-rose" id="compassRose" aria-hidden="true">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 5" opacity="0.4"/>
+          <line x1="40" y1="8" x2="40" y2="28" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="40" y1="52" x2="40" y2="72" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+          <line x1="8" y1="40" x2="28" y2="40" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+          <line x1="52" y1="40" x2="72" y2="40" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+          <polygon points="40,4 43.5,13 40,11 36.5,13" fill="currentColor"/>
+          <circle cx="40" cy="40" r="3.5" stroke="currentColor" stroke-width="1"/>
+          <line x1="51" y1="29" x2="55" y2="25" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
+          <line x1="29" y1="29" x2="25" y2="25" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
+          <line x1="51" y1="51" x2="55" y2="55" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
+          <line x1="29" y1="51" x2="25" y2="55" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
+          <text x="36.5" y="5.5" font-family="Arial Narrow, monospace" font-size="7" fill="currentColor" font-weight="700">N</text>
+        </svg>
+      </div>
+
       <div class="container hero-grid">
         <div>
           <p class="kicker">Because it can be done better</p>
-          <h1 class="metallic-text">Why<br>Archineering</h1>
+          <h1 class="hero-title" id="heroTitle" aria-label="Why Archineering">
+            <span class="hero-title-outline" aria-hidden="true">Why<br>Archineering</span>
+            <span class="hero-title-solid" aria-hidden="true">Why<br>Archineering</span>
+          </h1>
           <p class="hero-sub">engineering solutions from design to installation</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Start A Project</a>
@@ -1856,14 +2173,23 @@
           </div>
         </aside>
       </div>
+
+      <!-- Technical metadata overlay -->
+      <div class="hero-meta" aria-hidden="true">
+        <div class="hero-meta-row"><span class="meta-key">REF</span>ARC-2024-NZ-001</div>
+        <div class="hero-meta-row"><span class="meta-key">COORD</span>36°51'S 174°46'E</div>
+        <div class="hero-meta-row"><span class="meta-key">DRAWN</span>JC &nbsp;—&nbsp; REV: D</div>
+        <div class="hero-meta-row"><span class="meta-key">DATE</span>2024.11 &nbsp;—&nbsp; ARCHINEERING.CO.NZ</div>
+      </div>
     </section>
 
     <section id="about" class="section reveal">
       <div class="container">
+        <div class="sheet-label" aria-hidden="true">Sheet 01 / 05 — Capacity &amp; Capability</div>
         <h2 class="metallic-text">Capacity &amp; Capability</h2>
         <div class="grid">
           <article class="card reveal reveal-delay-1">
-            <p class="muted">A holistic approach to engineering solutions, from design to manufacture.</p>
+            <p class="muted">A holistic approach to engineering solutions, from design to manufacture and installation.</p>
           </article>
           <article class="card media-card reveal reveal-delay-2">
             <img src="./HOW_image.avif" alt="Archineering workshop and fabrication process" />
@@ -1877,6 +2203,7 @@
 
     <section id="design" class="section reveal blueprint-bg">
       <div class="container">
+        <div class="sheet-label" aria-hidden="true">Sheet 02 / 05 — Design &amp; Draughting</div>
         <h2 class="metallic-text">Design &amp; Draughting</h2>
         <div class="grid">
           <article class="card reveal reveal-delay-1">
@@ -1899,6 +2226,7 @@
 
     <section id="portfolio" class="section reveal">
       <div class="container">
+        <div class="sheet-label" aria-hidden="true">Sheet 03 / 05 — Portfolio</div>
         <h2 class="metallic-text">Portfolio</h2>
         <div class="works-grid">
 
@@ -1909,6 +2237,30 @@
                 <source src="./Te_Rahui_Model_to_Drawing.mp4" type="video/mp4">
               </video>
               <div class="play-hint">Hover to play</div>
+              <div class="reg-marks" aria-hidden="true">
+                <svg class="reg-mark tl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark tr" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark bl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark br" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+              </div>
+              <div class="bp-overlay" aria-hidden="true">
+                <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="80" y1="50" x2="80" y2="185" stroke="currentColor" stroke-width="2"/>
+                  <line x1="320" y1="50" x2="320" y2="185" stroke="currentColor" stroke-width="2"/>
+                  <line x1="80" y1="50" x2="200" y2="18" stroke="currentColor" stroke-width="2"/>
+                  <line x1="200" y1="18" x2="320" y2="50" stroke="currentColor" stroke-width="2"/>
+                  <line x1="40" y1="185" x2="360" y2="185" stroke="currentColor" stroke-width="1" stroke-dasharray="8 4"/>
+                  <rect x="70" y="183" width="20" height="5" fill="currentColor" opacity="0.5"/>
+                  <rect x="310" y="183" width="20" height="5" fill="currentColor" opacity="0.5"/>
+                  <circle cx="200" cy="18" r="4" stroke="currentColor" stroke-width="1.2"/>
+                  <circle cx="80" cy="50" r="4" stroke="currentColor" stroke-width="1.2"/>
+                  <circle cx="320" cy="50" r="4" stroke="currentColor" stroke-width="1.2"/>
+                  <line x1="80" y1="100" x2="320" y2="100" stroke="currentColor" stroke-width="0.75" stroke-dasharray="5 3" opacity="0.5"/>
+                  <text x="330" y="55" font-family="Arial Narrow,monospace" font-size="9" fill="currentColor" opacity="0.7">EL+4.2</text>
+                  <text x="165" y="14" font-family="Arial Narrow,monospace" font-size="9" fill="currentColor" opacity="0.7">RIDGE</text>
+                  <text x="140" y="210" font-family="Arial Narrow,monospace" font-size="9" fill="currentColor" opacity="0.6">PORTAL FRAME — ELEVATION</text>
+                </svg>
+              </div>
             </div>
           </article>
 
@@ -1919,6 +2271,38 @@
                 <source src="./Te_Matai_Website_Video.mp4" type="video/mp4">
               </video>
               <div class="play-hint">Hover to play</div>
+              <div class="reg-marks" aria-hidden="true">
+                <svg class="reg-mark tl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark tr" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark bl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark br" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+              </div>
+              <div class="bp-overlay" aria-hidden="true">
+                <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="40" y1="85" x2="360" y2="85" stroke="currentColor" stroke-width="2"/>
+                  <line x1="40" y1="150" x2="360" y2="150" stroke="currentColor" stroke-width="2"/>
+                  <line x1="40" y1="80" x2="40" y2="155" stroke="currentColor" stroke-width="2"/>
+                  <line x1="360" y1="80" x2="360" y2="155" stroke="currentColor" stroke-width="2"/>
+                  <line x1="100" y1="85" x2="100" y2="150" stroke="currentColor" stroke-width="1.2"/>
+                  <line x1="160" y1="85" x2="160" y2="150" stroke="currentColor" stroke-width="1.2"/>
+                  <line x1="220" y1="85" x2="220" y2="150" stroke="currentColor" stroke-width="1.2"/>
+                  <line x1="280" y1="85" x2="280" y2="150" stroke="currentColor" stroke-width="1.2"/>
+                  <line x1="40" y1="150" x2="100" y2="85" stroke="currentColor" stroke-width="0.9"/>
+                  <line x1="100" y1="150" x2="160" y2="85" stroke="currentColor" stroke-width="0.9"/>
+                  <line x1="160" y1="85" x2="220" y2="150" stroke="currentColor" stroke-width="0.9"/>
+                  <line x1="220" y1="85" x2="280" y2="150" stroke="currentColor" stroke-width="0.9"/>
+                  <line x1="280" y1="85" x2="360" y2="150" stroke="currentColor" stroke-width="0.9"/>
+                  <circle cx="40" cy="85" r="3" fill="currentColor"/>
+                  <circle cx="40" cy="150" r="3" fill="currentColor"/>
+                  <circle cx="100" cy="85" r="2.5" fill="currentColor"/>
+                  <circle cx="160" cy="85" r="2.5" fill="currentColor"/>
+                  <circle cx="360" cy="85" r="3" fill="currentColor"/>
+                  <circle cx="360" cy="150" r="3" fill="currentColor"/>
+                  <text x="150" y="200" font-family="Arial Narrow,monospace" font-size="9" fill="currentColor" opacity="0.6">ROOF TRUSS — ELEVATION</text>
+                  <text x="345" y="82" font-family="Arial Narrow,monospace" font-size="8" fill="currentColor" opacity="0.6">TC</text>
+                  <text x="345" y="162" font-family="Arial Narrow,monospace" font-size="8" fill="currentColor" opacity="0.6">BC</text>
+                </svg>
+              </div>
             </div>
           </article>
 
@@ -1929,6 +2313,33 @@
                 <source src="./HTS_for_Website.mp4" type="video/mp4">
               </video>
               <div class="play-hint">Hover to play</div>
+              <div class="reg-marks" aria-hidden="true">
+                <svg class="reg-mark tl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark tr" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark bl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark br" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+              </div>
+              <div class="bp-overlay" aria-hidden="true">
+                <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="170" y="82" width="60" height="60" stroke="currentColor" stroke-width="2"/>
+                  <rect x="170" y="82" width="60" height="10" fill="currentColor" opacity="0.15"/>
+                  <rect x="170" y="132" width="60" height="10" fill="currentColor" opacity="0.15"/>
+                  <line x1="195" y1="92" x2="195" y2="132" stroke="currentColor" stroke-width="1.5"/>
+                  <line x1="205" y1="92" x2="205" y2="132" stroke="currentColor" stroke-width="1.5"/>
+                  <line x1="40" y1="112" x2="170" y2="112" stroke="currentColor" stroke-width="2"/>
+                  <line x1="230" y1="112" x2="360" y2="112" stroke="currentColor" stroke-width="2"/>
+                  <line x1="200" y1="40" x2="200" y2="82" stroke="currentColor" stroke-width="2"/>
+                  <line x1="200" y1="142" x2="200" y2="185" stroke="currentColor" stroke-width="2"/>
+                  <rect x="40" y="107" width="4" height="10" fill="currentColor"/>
+                  <rect x="356" y="107" width="4" height="10" fill="currentColor"/>
+                  <circle cx="154" cy="105" r="2.5" stroke="currentColor" stroke-width="1"/>
+                  <circle cx="154" cy="119" r="2.5" stroke="currentColor" stroke-width="1"/>
+                  <line x1="200" y1="20" x2="200" y2="40" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.4"/>
+                  <line x1="200" y1="185" x2="200" y2="205" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.4"/>
+                  <text x="120" y="72" font-family="Arial Narrow,monospace" font-size="8" fill="currentColor" opacity="0.65">COLUMN BASEPLATE — PLAN</text>
+                  <text x="242" y="116" font-family="Arial Narrow,monospace" font-size="8" fill="currentColor" opacity="0.65">250UC89</text>
+                </svg>
+              </div>
             </div>
           </article>
 
@@ -1939,6 +2350,29 @@
                 <source src="./Stair_fir_website.mp4" type="video/mp4">
               </video>
               <div class="play-hint">Hover to play</div>
+              <div class="reg-marks" aria-hidden="true">
+                <svg class="reg-mark tl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark tr" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark bl" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                <svg class="reg-mark br" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="8,2 2,2 2,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+              </div>
+              <div class="bp-overlay" aria-hidden="true">
+                <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="55,185 55,158 90,158 90,131 125,131 125,104 160,104 160,77 195,77 195,50 230,50 265,50" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"/>
+                  <line x1="55" y1="185" x2="265" y2="50" stroke="currentColor" stroke-width="1.2" stroke-dasharray="6 3"/>
+                  <line x1="265" y1="50" x2="345" y2="50" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="55,148 90,148 125,121 160,94 195,67 265,40 345,40" stroke="currentColor" stroke-width="0.9" stroke-dasharray="5 3" opacity="0.55"/>
+                  <line x1="55" y1="185" x2="345" y2="185" stroke="currentColor" stroke-width="1" stroke-dasharray="8 4" opacity="0.6"/>
+                  <line x1="55" y1="185" x2="55" y2="200" stroke="currentColor" stroke-width="2"/>
+                  <line x1="345" y1="50" x2="345" y2="200" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="90" cy="158" r="2" fill="currentColor" opacity="0.7"/>
+                  <circle cx="125" cy="131" r="2" fill="currentColor" opacity="0.7"/>
+                  <circle cx="160" cy="104" r="2" fill="currentColor" opacity="0.7"/>
+                  <circle cx="195" cy="77" r="2" fill="currentColor" opacity="0.7"/>
+                  <text x="155" y="208" font-family="Arial Narrow,monospace" font-size="9" fill="currentColor" opacity="0.65">STAIR — ELEVATION 1:20</text>
+                  <text x="265" y="120" font-family="Arial Narrow,monospace" font-size="8" fill="currentColor" opacity="0.55" transform="rotate(-27 265 120)">PITCH 27°</text>
+                </svg>
+              </div>
             </div>
           </article>
 
@@ -1948,6 +2382,7 @@
 
     <section id="values" class="section reveal">
       <div class="container">
+        <div class="sheet-label" aria-hidden="true">Sheet 04 / 05 — Our Values</div>
         <h2 class="metallic-text">Our Values</h2>
         <div class="values">
           <div class="value reveal reveal-delay-1">Striving for Excellence</div>
@@ -1959,6 +2394,7 @@
 
     <section id="contact" class="section reveal quiet-bg">
       <div class="container" style="text-align:center; padding: 3rem 0;">
+        <div class="sheet-label" aria-hidden="true">Sheet 05 / 05 — Start a Project</div>
         <h2 class="metallic-text">Start a Project</h2>
         <p class="muted" style="margin: 0.8rem auto 1.6rem; max-width:560px; text-align:center;">
           Our project assistant will scope your requirements in under two minutes — then send us everything we need to get back to you.
@@ -2086,22 +2522,22 @@
   </footer>
 
   <script>
-    // Dark Mode Logic
+    // Theme Logic — dark is DEFAULT, light is opt-in
     const themeBtn = document.getElementById('theme-btn');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
 
-    // Set initial theme
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.body.classList.add('dark-theme');
+    // Only apply light-theme if explicitly saved, or if user prefers light
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+      document.body.classList.add('light-theme');
     }
 
-    // Toggle logic
+    // Toggle between dark (default) and light
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
       });
     }
 
@@ -2243,6 +2679,60 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
       }, { threshold: 0.3 });
       hybridObs.observe(hybridEl);
+    }
+
+    // ── Custom crosshair cursor ───────────────────────────────────────
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.body.classList.add('custom-cursor');
+      const cursorEl = document.getElementById('cursor');
+      let cx = -100, cy = -100;
+      document.addEventListener('mousemove', e => {
+        cx = e.clientX; cy = e.clientY;
+        cursorEl.style.left = cx + 'px';
+        cursorEl.style.top  = cy + 'px';
+      }, { passive: true });
+      document.addEventListener('mouseleave', () => { cursorEl.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { cursorEl.style.opacity = '1'; });
+    }
+
+    // ── Scroll progress rail ─────────────────────────────────────────
+    const scrollFillEl = document.getElementById('scrollFill');
+    if (scrollFillEl) {
+      window.addEventListener('scroll', () => {
+        const st = window.scrollY;
+        const dh = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = dh > 0 ? Math.min(100, (st / dh) * 100) : 0;
+        scrollFillEl.style.height = pct + '%';
+      }, { passive: true });
+    }
+
+    // ── Hero title fill on scroll ────────────────────────────────────
+    const heroTitleEl = document.getElementById('heroTitle');
+    const heroSectionEl = document.getElementById('hero-section');
+    if (heroTitleEl && heroSectionEl) {
+      // Trigger fill after hero is ~25% scrolled through
+      const titleFillObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            heroTitleEl.classList.add('fill-active');
+          } else {
+            heroTitleEl.classList.remove('fill-active');
+          }
+        });
+      }, { threshold: 0.5 });
+      titleFillObs.observe(heroSectionEl);
+    }
+
+    // ── Compass rose mouse parallax ──────────────────────────────────
+    const compassEl = document.getElementById('compassRose');
+    if (heroSectionEl && compassEl) {
+      heroSectionEl.addEventListener('mousemove', e => {
+        const rx = ((e.clientX / window.innerWidth) - 0.5) * 10;
+        compassEl.style.transform = `rotate(${rx}deg)`;
+      });
+      heroSectionEl.addEventListener('mouseleave', () => {
+        compassEl.style.transform = 'rotate(0deg)';
+      });
     }
   </script>
 
